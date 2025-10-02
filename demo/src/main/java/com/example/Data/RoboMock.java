@@ -1,7 +1,9 @@
-package com.example;
+package com.example.Data;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.example.Robo;
 
 public class RoboMock {
     public static List<Robo> getRobos() {

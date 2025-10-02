@@ -14,8 +14,26 @@ import com.example.Robo;
 @RequestMapping("/acmebots")
 public class RoboController {
 
+    //TODO: IMPLEMENTAR METODOS GET
+
     @GetMapping("/listarobos")
     public List<Robo> listarRobos() {
         return RoboMock.getRobos();
     }
+
+    @GetMapping("/listaclientes")
+    public void listarClientes(){
+
+    }
+
+    @GetMapping("/listavendas")
+    public void listarVendas(){
+
+    }
+
+    @GetMapping("/consultacliente")
+    public void consultarClientes(){
+
+    }
+
 }

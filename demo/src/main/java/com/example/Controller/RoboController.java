@@ -23,21 +23,21 @@ public class RoboController {
         return RoboMock.getRobos(); //depois que implementar o resto, mudar isso pra buscar o resto dos robos, e não só os mockados
     }
 
-    @PostMapping("path")
-    public void cadastrarRoboImperial(@RequestBody Robo roboImperial) {
-        //TODO: process POST request
+    // @PostMapping("path")
+    // public void cadastrarRoboImperial(@RequestBody Robo roboImperial) {
+    //     //TODO: process POST request
         
-        //return entity;
-    }
+    //     //return entity;
+    // }
 
-    @PostMapping("path")
-    public void cadastrarRoboMetrico(@RequestBody Robo roboMetrico) {
-        // Robo novoRobo = new Robo(
-        //     //setar o sistema metrico nesse cadastro
-        //     SistemaMedida.METRICO
-        // );
-        //RoboService.salvar(robo);
-        // return novoRobo;
-    }
+    // @PostMapping("path")
+    // public void cadastrarRoboMetrico(@RequestBody Robo roboMetrico) {
+    //     // Robo novoRobo = new Robo(
+    //     //     //setar o sistema metrico nesse cadastro
+    //     //     SistemaMedida.METRICO
+    //     // );
+    //     //RoboService.salvar(robo);
+    //     // return novoRobo;
+    // }
 
 }

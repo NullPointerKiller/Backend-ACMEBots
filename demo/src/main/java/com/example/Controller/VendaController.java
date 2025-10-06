@@ -1,23 +1,23 @@
 package com.example.Controller;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.MockData.VendaMock;
-import com.example.Model.Venda;
+import java.util.Map;
 
-
-//nao ta funcionando
 @RestController
 @RequestMapping("/acmebots")
 public class VendaController {
 
-    @GetMapping("/listavendas")
-    public List<Venda> listarVendas(){
-        return VendaMock.getVendas();
+    @PostMapping("/cadastro/cadvenda")
+    public boolean cadastrarVenda(@RequestBody Map<String, Object> body){
+        if (body == null) return false;
+        Object numero = body.get("numero");
+        if (numero == null) return false;
+        String numStr = String.valueOf(numero).trim();
+        if (numStr.isEmpty()) return false;
+        return true;
     }
-    
 }

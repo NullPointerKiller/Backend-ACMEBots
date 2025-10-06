@@ -2,7 +2,10 @@ package com.example.Model;
 
 import java.util.Date;
 
-import com.example.Service.Calculo.*;
+import com.example.Model.Enum.SistemaMedida;
+import com.example.Service.Calculo.CalculoImperial;
+import com.example.Service.Calculo.CalculoMetrico;
+import com.example.Service.Calculo.CalculoVendaStrategy;
 
 public class Venda {
     
@@ -17,13 +20,12 @@ public class Venda {
         this.dataAtual = dataAtual;
     }
 
-    CalculoVendaStrategy strategy = this.SistemaMedida == SistemaMedida.METRICO
+    CalculoVendaStrategy strategy = this.robo.getSistemaMedida() == SistemaMedida.METRICO
         ? new CalculoMetrico()
         : new CalculoImperial();
 
     double valorFinal = strategy.calcular(robo);
 
-
-
+    public double getValorAlocacao(){ return valorFinal; }
 
 }

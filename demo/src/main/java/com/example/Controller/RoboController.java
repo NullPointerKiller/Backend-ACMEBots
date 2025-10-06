@@ -8,36 +8,58 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.MockData.RoboMock;
 import com.example.Model.Robo;
-
-
+import com.example.Model.Enum.SistemaMedida;
+import com.example.Service.RoboService;
 
 @RestController
 @RequestMapping("/acmebots")
 public class RoboController {
 
-    
+    private final RoboService roboService = new RoboService();
+
     @GetMapping("/listarobos")
     public List<Robo> listarRobos() {
-        return RoboMock.getRobos(); //depois que implementar o resto, mudar isso pra buscar o resto dos robos, e não só os mockados
+        return roboService.listarTodos();
     }
 
-    // @PostMapping("path")
-    // public void cadastrarRoboImperial(@RequestBody Robo roboImperial) {
-    //     //TODO: process POST request
-        
-    //     //return entity;
-    // }
+    //testar
+    @PostMapping("/cadastro/cadroboimperial")
+    public boolean cadastrarRoboImperial(@RequestBody Robo roboImperial) {
+        try {
+            roboService.cadastrarRobo(roboImperial, SistemaMedida.IMPERIAL);
 
-    // @PostMapping("path")
-    // public void cadastrarRoboMetrico(@RequestBody Robo roboMetrico) {
-    //     // Robo novoRobo = new Robo(
-    //     //     //setar o sistema metrico nesse cadastro
-    //     //     SistemaMedida.METRICO
-    //     // );
-    //     //RoboService.salvar(robo);
-    //     // return novoRobo;
-    // }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        
+    }
+
+    //testar
+    @PostMapping("/cadastro/cadrobometric")
+    public boolean cadastrarRoboMetrico(@RequestBody Robo roboMetrico) {
+        try {
+            roboService.cadastrarRobo(roboMetrico, SistemaMedida.METRICO);
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    //testar
+    @PostMapping("/validarobometric")
+    public List<Robo> filtraRobosMetricos(@RequestBody Robo roboFiltro){
+        return roboService.filtrarRobosDisponiveis(roboFiltro, SistemaMedida.METRICO);
+    }
+
+    //testar
+    @PostMapping("/validaroboimperial")
+    public List<Robo> filtraRobosImperiais(@RequestBody Robo roboFiltro){
+        return roboService.filtrarRobosDisponiveis(roboFiltro, SistemaMedida.IMPERIAL);
+    }
+
+
 
 }

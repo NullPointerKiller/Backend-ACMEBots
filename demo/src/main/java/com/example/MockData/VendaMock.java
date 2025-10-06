@@ -8,7 +8,7 @@ import com.example.Model.Venda;
 
 public class VendaMock {
 
-    List<Venda> vendas = new ArrayList<>();
+    static List<Venda> vendas = new ArrayList<>();
 
     
     static Date dataVenda = new Date();
@@ -22,7 +22,7 @@ public class VendaMock {
     
     //TODO: fazer dois cadastros de venda
 
-    public List<Venda> getVendas(){
+    public static List<Venda> getVendas(){
         vendas.add(venda1);
         return vendas;
     }

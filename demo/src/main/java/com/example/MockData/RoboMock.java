@@ -6,7 +6,6 @@ import java.util.List;
 import com.example.Model.Enum.SistemaMedida;
 import com.example.Model.Robo;
 
-//TODO: fazer 10 cadastros de robos ao total (5 de sistema metrico e 5 de sistema imperial)
 public class RoboMock {
     static List<Robo> robos = new ArrayList<>();
 

@@ -14,9 +14,11 @@ public class ClienteMock {
     static Cliente cliente3 = new Cliente("Elon Musk", "musk@naoexiste.com");
 
     public static List<Cliente> getClientes(){
-        clientes.add(cliente1);
-        clientes.add(cliente2);
-        clientes.add(cliente3);
+        if(clientes.isEmpty()){
+            clientes.add(cliente1);
+            clientes.add(cliente2);
+            clientes.add(cliente3);
+        }
         return clientes;
     }
     

@@ -12,19 +12,20 @@ public class Venda {
     private Robo robo;
     private Cliente cliente;
     private Date dataAtual;
+    private double valorFinal;
 
 
     public Venda(Robo robo, Cliente cliente, Date dataAtual){
         this.robo = robo;
         this.cliente = cliente;
         this.dataAtual = dataAtual;
-    }
 
-    CalculoVendaStrategy strategy = this.robo.getSistemaMedida() == SistemaMedida.METRICO
+        CalculoVendaStrategy strategy = this.robo.getSistemaMedida() == SistemaMedida.METRICO
         ? new CalculoMetrico()
         : new CalculoImperial();
 
-    double valorFinal = strategy.calcular(robo);
+        this.valorFinal = strategy.calcular(robo);
+    }
 
     public double getValorAlocacao(){ return valorFinal; }
 

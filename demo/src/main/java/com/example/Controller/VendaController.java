@@ -27,7 +27,7 @@ public class VendaController {
     @PostMapping("/cadastro/cadvenda")
     public boolean cadastrarVenda(@RequestBody Venda body){
         try {
-            Venda venda = vendaService.cadastrarVenda(body.getRobo(), body.getCliente());
+            Venda venda = vendaService.cadastrarVenda(body.getRobo(), body.getCliente(), body.getDataVenda());
             return venda != null;
         } catch (Exception e) {
             return false;

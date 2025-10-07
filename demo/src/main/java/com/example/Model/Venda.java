@@ -12,27 +12,45 @@ public class Venda {
     
     private Robo robo;
     private Cliente cliente;
-    private Date dataAtual;
+    private Date dataVenda;
     private double valorFinal;
     private String numeroSerie;
 
+    public Venda() {}
 
-    public Venda(Robo robo, Cliente cliente, Date dataAtual){
+    public Venda(Robo robo, Cliente cliente, Date dataVenda){
         this.numeroSerie = UUID.randomUUID().toString();
         this.robo = robo;
         this.cliente = cliente;
-        this.dataAtual = dataAtual;
+        this.dataVenda = dataVenda;
 
-        CalculoVendaStrategy strategy = this.robo.getSistemaMedida() == SistemaMedida.METRICO
-        ? new CalculoMetrico()
-        : new CalculoImperial();
+        calcularValorFinal();
+    }
 
-        this.valorFinal = strategy.calcular(robo);
+    private void calcularValorFinal() {
+        if (this.robo != null) {
+            CalculoVendaStrategy strategy = this.robo.getSistemaMedida() == SistemaMedida.METRICO
+                ? new CalculoMetrico()
+                : new CalculoImperial();
+
+            this.valorFinal = strategy.calcular(robo);
+        }
     }
 
     public Robo getRobo(){ return robo; }
-    public Cliente getCliente(){ return cliente; }
-    public String getNumeroSerie(){ return numeroSerie; }
-    public double getValorAlocacao(){ return valorFinal; }
+    public void setRobo(Robo robo) { 
+        this.robo = robo; 
+        calcularValorFinal();
+    }
 
+    public Cliente getCliente(){ return cliente; }
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+
+    public String getNumeroSerie(){ return numeroSerie; }
+    public void setNumeroSerie(String numeroSerie) { this.numeroSerie = numeroSerie; }
+
+    public double getValorFinal(){ return valorFinal; }
+
+    public Date getDataVenda(){ return dataVenda; }
+    public void setDataVenda(Date dataVenda) { this.dataVenda = dataVenda; }
 }

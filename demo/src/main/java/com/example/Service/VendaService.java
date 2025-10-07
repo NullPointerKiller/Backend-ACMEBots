@@ -17,9 +17,9 @@ public class VendaService {
         return vendas;
     }
 
-    public Venda cadastrarVenda(Robo robo, Cliente cliente){
+    public Venda cadastrarVenda(Robo robo, Cliente cliente, Date dataVenda){
         if(robo.getStatus() == StatusRobo.DISPONIVEL){
-            Venda venda = new Venda(robo, cliente, new Date());
+            Venda venda = new Venda(robo, cliente, dataVenda);
             vendas.add(venda);
             robo.setStatus(StatusRobo.VENDIDO);
             return venda;
@@ -30,7 +30,7 @@ public class VendaService {
     public boolean cancelarVenda(String numeroSerie){
         return vendas.removeIf(venda -> {
             if (venda.getNumeroSerie().equals(numeroSerie)) {
-                venda.getRobo().setStatus(StatusRobo.DISPONIVEL);//aqui se o robo for devolvido varias vezes, dependendo ele cai fora
+                venda.getRobo().setStatus(StatusRobo.DISPONIVEL);
                 return true;
             }
             return false;

@@ -1,6 +1,7 @@
 package com.example.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Model.Venda;
+import com.example.Service.RoboService;
 import com.example.Service.VendaService;
 
 
@@ -17,7 +19,8 @@ import com.example.Service.VendaService;
 @RequestMapping("/acmebots")
 public class VendaController {
 
-    private final VendaService vendaService = new VendaService();
+    private final RoboService roboService = new RoboService();
+    private final VendaService vendaService = new VendaService(roboService);
 
     @GetMapping("/listavendas")
     public List<Venda> listaVendas(){
@@ -27,7 +30,7 @@ public class VendaController {
     @PostMapping("/cadastro/cadvenda")
     public boolean cadastrarVenda(@RequestBody Venda body){
         try {
-            Venda venda = vendaService.cadastrarVenda(body.getRobo(), body.getCliente());
+            Venda venda = vendaService.cadastrarVenda(body.getRobo(), body.getCliente(), body.getDataVenda());
             return venda != null;
         } catch (Exception e) {
             return false;
@@ -35,8 +38,9 @@ public class VendaController {
     }
 
     @DeleteMapping("/cadastro/cancelavenda")
-    public boolean cancelarVenda(@RequestBody String roboId){
-        return vendaService.cancelarVenda(roboId);
+    public boolean cancelarVenda(@RequestBody Map<String, String> body){
+        String vendaId = body.get("numeroSerie");
+        return vendaService.cancelarVenda(vendaId);
     }
 
 }

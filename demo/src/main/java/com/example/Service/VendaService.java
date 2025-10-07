@@ -12,25 +12,38 @@ import com.example.Model.Venda;
 
 public class VendaService {
     private final List<Venda> vendas = new ArrayList<>(VendaMock.getVendas());
+    private final RoboService roboService;
+
+    public VendaService(RoboService roboService) {
+        this.roboService = roboService;
+    }
 
     public List<Venda> listarVendas(){
         return vendas;
     }
 
-    public Venda cadastrarVenda(Robo robo, Cliente cliente){
-        if(robo.getStatus() == StatusRobo.DISPONIVEL){
-            Venda venda = new Venda(robo, cliente, new Date());
+    public Venda cadastrarVenda(Robo roboPayload, Cliente cliente, Date dataVenda){
+        Robo roboReal = roboService.listarTodos().stream()
+        .filter(r -> r.getId().equals(roboPayload.getId()))
+        .findFirst()
+        .orElse(null);
+
+        if(roboReal != null && roboReal.getStatus() == StatusRobo.DISPONIVEL){
+            Venda venda = new Venda(roboReal, cliente, dataVenda);
             vendas.add(venda);
-            robo.setStatus(StatusRobo.VENDIDO);
+
+            roboReal.setStatus(StatusRobo.VENDIDO);
+            roboReal.setDataVenda(dataVenda);
+
             return venda;
         }
         return null;
     }
 
-    public boolean cancelarVenda(String numeroSerie){
+    public boolean cancelarVenda(String vendaId){
         return vendas.removeIf(venda -> {
-            if (venda.getNumeroSerie().equals(numeroSerie)) {
-                venda.getRobo().setStatus(StatusRobo.DISPONIVEL);//aqui se o robo for devolvido varias vezes, dependendo ele cai fora
+            if (venda.getNumeroSerie().equals(vendaId)) {
+                venda.getRobo().setStatus(StatusRobo.DISPONIVEL);
                 return true;
             }
             return false;

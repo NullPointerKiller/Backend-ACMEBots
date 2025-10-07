@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Model.Venda;
+import com.example.Service.RoboService;
 import com.example.Service.VendaService;
 
 
@@ -18,7 +19,8 @@ import com.example.Service.VendaService;
 @RequestMapping("/acmebots")
 public class VendaController {
 
-    private final VendaService vendaService = new VendaService();
+    private final RoboService roboService = new RoboService();
+    private final VendaService vendaService = new VendaService(roboService);
 
     @GetMapping("/listavendas")
     public List<Venda> listaVendas(){

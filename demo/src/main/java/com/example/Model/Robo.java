@@ -17,6 +17,8 @@ public class Robo {
     private Date dataCadastro;
     private Date dataVenda;
 
+    public Robo(){}
+
     public Robo(String id, String modelo, double valor, int autonomia, int carga, int temperatura, SistemaMedida sm, StatusRobo status, Date dataCadastro) {
         this.id = id;
         this.modelo = modelo;

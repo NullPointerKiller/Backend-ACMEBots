@@ -16,6 +16,7 @@ public class RoboService {
 
     public Robo cadastrarRobo(Robo robo, SistemaMedida sistema){
         robo.setSistemaMedida(sistema);
+        robo.setStatus(StatusRobo.DISPONIVEL);
         robos.add(robo);
         return robo;
     }
@@ -25,32 +26,9 @@ public class RoboService {
     }
 
     public List<Robo> filtrarRobosDisponiveis(Robo filtro, SistemaMedida sistema){
-        Date dataAtual = new Date();
-        
-        for(Robo robo: robos){
-            boolean dataExpirada = false;
-
-            if(robo.getDataCadastro() != null){
-                long diffCadastro = dataAtual.getTime() - robo.getDataCadastro().getTime();
-                long anosCadastro = TimeUnit.MILLISECONDS.toDays(diffCadastro) / 365;
-                if(anosCadastro > 7){
-                    dataExpirada = true;
-                }
-            }
-
-            if(robo.getDataVenda() != null){
-                long diffVenda = dataAtual.getTime() - robo.getDataVenda().getTime();
-                long anosVenda = TimeUnit.MILLISECONDS.toDays(diffVenda) / 365;
-                if(anosVenda > 5){
-                    dataExpirada = true;
-                }
-            }
-
-            if(dataExpirada){
-                robo.setStatus(StatusRobo.DESCARTADO);
-            }
+        for (Robo robo : robos) {
+            if (isRoboExpirado(robo)) robo.setStatus(StatusRobo.DESCARTADO);
         }
-
 
         return robos.stream()
                 .filter(r -> r.getSistemaMedida() == sistema)
@@ -61,7 +39,6 @@ public class RoboService {
                 .toList();
     }
 
-    //testar
     public Robo atualizarRobo(String id, StatusRobo novoStatus){
         for (Robo robo : robos) {
             if(robo.getId().equals(id)){
@@ -70,6 +47,24 @@ public class RoboService {
             }
         }
         return null;
+    }
+
+    private boolean isRoboExpirado(Robo robo) {
+        Date dataAtual = new Date();
+
+        if (robo.getDataCadastro() != null) {
+            long diffCadastro = dataAtual.getTime() - robo.getDataCadastro().getTime();
+            long anosCadastro = TimeUnit.MILLISECONDS.toDays(diffCadastro) / 365;
+            if (anosCadastro > 7) return true;
+        }
+
+        if (robo.getDataVenda() != null) {
+            long diffVenda = dataAtual.getTime() - robo.getDataVenda().getTime();
+            long anosVenda = TimeUnit.MILLISECONDS.toDays(diffVenda) / 365;
+            if (anosVenda > 5) return true;
+        }
+
+        return false;
     }
 
 }

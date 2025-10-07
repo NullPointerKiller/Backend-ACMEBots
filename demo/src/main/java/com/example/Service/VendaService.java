@@ -12,17 +12,29 @@ import com.example.Model.Venda;
 
 public class VendaService {
     private final List<Venda> vendas = new ArrayList<>(VendaMock.getVendas());
+    private final RoboService roboService;
+
+    public VendaService(RoboService roboService) {
+        this.roboService = roboService;
+    }
 
     public List<Venda> listarVendas(){
         return vendas;
     }
 
-    public Venda cadastrarVenda(Robo robo, Cliente cliente, Date dataVenda){
-        if(robo.getStatus() == StatusRobo.DISPONIVEL){
-            Venda venda = new Venda(robo, cliente, dataVenda);
+    public Venda cadastrarVenda(Robo roboPayload, Cliente cliente, Date dataVenda){
+        Robo roboReal = roboService.listarTodos().stream()
+        .filter(r -> r.getId().equals(roboPayload.getId()))
+        .findFirst()
+        .orElse(null);
+
+        if(roboReal != null && roboReal.getStatus() == StatusRobo.DISPONIVEL){
+            Venda venda = new Venda(roboReal, cliente, dataVenda);
             vendas.add(venda);
-            robo.setStatus(StatusRobo.VENDIDO);
-            robo.setDataVenda(dataVenda);
+
+            roboReal.setStatus(StatusRobo.VENDIDO);
+            roboReal.setDataVenda(dataVenda);
+
             return venda;
         }
         return null;

@@ -21,13 +21,11 @@ public class RoboController {
 
     private final RoboService roboService = new RoboService();
 
-    //FUNCIONANDO
     @GetMapping("/listarobos")
     public List<Robo> listarRobos() {
         return roboService.listarTodos();
     }
 
-    //testar
     @PostMapping("/cadastro/cadroboimperial")
     public boolean cadastrarRoboImperial(@RequestBody Robo roboImperial) {
         try {
@@ -39,7 +37,6 @@ public class RoboController {
         
     }
 
-    //testar aqui pra tirar os com mais de 7 anos
     @PostMapping("/cadastro/cadrobometric")
     public boolean cadastrarRoboMetrico(@RequestBody Robo roboMetrico) {
         try {
@@ -50,19 +47,16 @@ public class RoboController {
         }
     }
 
-    //testar
     @PostMapping("/validarobometric")
     public List<Robo> filtraRobosMetricos(@RequestBody Robo roboFiltro){
         return roboService.filtrarRobosDisponiveis(roboFiltro, SistemaMedida.METRICO);
     }
 
-    //testar
     @PostMapping("/validaroboimperial")
     public List<Robo> filtraRobosImperiais(@RequestBody Robo roboFiltro){
         return roboService.filtrarRobosDisponiveis(roboFiltro, SistemaMedida.IMPERIAL);
     }
 
-    //FUNCIONANDO
     @PutMapping("cadastro/atualizarobo/{id}/estado/{status}")
     public Robo atualizaRobo(@PathVariable String id, @PathVariable String status) {
         return roboService.atualizarRobo(id, StatusRobo.valueOf(status.toUpperCase()));

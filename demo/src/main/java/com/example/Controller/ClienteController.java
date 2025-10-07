@@ -14,8 +14,10 @@ import com.example.Model.Cliente;
 @RequestMapping("/acmebots")
 public class ClienteController {
 
+    //TODO: criar controller para cliente, para padronização
 
-    @GetMapping("/consultacliente") //OK
+
+    @GetMapping("/consultacliente")
     public Cliente consultarClientes(@RequestParam String codigo){
         return ClienteMock.getClientes().stream()
             .filter(c -> c.getCodigo().equals(codigo))
@@ -23,9 +25,9 @@ public class ClienteController {
             .orElse(null);  
     }
 
-    @GetMapping("/listaclientes") //OK
+    @GetMapping("/listaclientes")
     public List<Cliente> listarClientes(){
-        return ClienteMock.getClientes(); //return ClienteService.listarClientes();
+        return ClienteMock.getClientes();
     }
     
 }

@@ -27,7 +27,6 @@ public class RoboService {
     public List<Robo> filtrarRobosDisponiveis(Robo filtro, SistemaMedida sistema){
         Date dataAtual = new Date();
         
-        //modularizar isso aqui depois
         for(Robo robo: robos){
             boolean dataExpirada = false;
 

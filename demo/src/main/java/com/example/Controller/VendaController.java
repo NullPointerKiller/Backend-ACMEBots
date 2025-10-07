@@ -1,6 +1,7 @@
 package com.example.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +36,9 @@ public class VendaController {
     }
 
     @DeleteMapping("/cadastro/cancelavenda")
-    public boolean cancelarVenda(@RequestBody String roboId){
-        return vendaService.cancelarVenda(roboId);
+    public boolean cancelarVenda(@RequestBody Map<String, String> body){
+        String vendaId = body.get("numeroSerie");
+        return vendaService.cancelarVenda(vendaId);
     }
 
 }

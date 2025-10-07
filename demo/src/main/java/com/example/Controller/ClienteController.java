@@ -15,7 +15,7 @@ import com.example.Model.Cliente;
 public class ClienteController {
 
 
-    @GetMapping("/consultacliente") //lembrar de usar a ClienteService ao invés do clienteMock
+    @GetMapping("/consultacliente") //OK
     public Cliente consultarClientes(@RequestParam String codigo){
         return ClienteMock.getClientes().stream()
             .filter(c -> c.getCodigo().equals(codigo))
@@ -23,7 +23,7 @@ public class ClienteController {
             .orElse(null);  
     }
 
-    @GetMapping("/listaclientes") 
+    @GetMapping("/listaclientes") //OK
     public List<Cliente> listarClientes(){
         return ClienteMock.getClientes(); //return ClienteService.listarClientes();
     }

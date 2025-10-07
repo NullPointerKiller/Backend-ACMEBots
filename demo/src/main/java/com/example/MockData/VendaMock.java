@@ -10,16 +10,19 @@ public class VendaMock {
 
     static List<Venda> vendas = new ArrayList<>();
 
+    static Date dataVenda1 = new Date();
+    static Date dataVenda2 = new Date(System.currentTimeMillis() - 86400000L * 3);
+
     static Venda venda1 = new Venda(
         RoboMock.getRobos().get(0),
         ClienteMock.getClientes().get(0),
-        new Date()
+        dataVenda1
     );
 
     static Venda venda2 = new Venda(
         RoboMock.getRobos().get(1),
         ClienteMock.getClientes().get(1),
-        new Date()
+        dataVenda2
     );
 
     public static List<Venda> getVendas(){
@@ -29,7 +32,4 @@ public class VendaMock {
         }
         return vendas;
     }
-
-
-
 }

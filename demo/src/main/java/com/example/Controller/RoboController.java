@@ -21,6 +21,7 @@ public class RoboController {
 
     private final RoboService roboService = new RoboService();
 
+    //FUNCIONANDO
     @GetMapping("/listarobos")
     public List<Robo> listarRobos() {
         return roboService.listarTodos();
@@ -61,7 +62,7 @@ public class RoboController {
         return roboService.filtrarRobosDisponiveis(roboFiltro, SistemaMedida.IMPERIAL);
     }
 
-    //TODO: AJUSTAR ESSE AQUI
+    //FUNCIONANDO
     @PutMapping("cadastro/atualizarobo/{id}/estado/{status}")
     public Robo atualizaRobo(@PathVariable String id, @PathVariable String status) {
         return roboService.atualizarRobo(id, StatusRobo.valueOf(status.toUpperCase()));

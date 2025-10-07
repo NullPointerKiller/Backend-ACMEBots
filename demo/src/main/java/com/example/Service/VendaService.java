@@ -22,14 +22,15 @@ public class VendaService {
             Venda venda = new Venda(robo, cliente, dataVenda);
             vendas.add(venda);
             robo.setStatus(StatusRobo.VENDIDO);
+            robo.setDataVenda(dataVenda);
             return venda;
         }
         return null;
     }
 
-    public boolean cancelarVenda(String numeroSerie){
+    public boolean cancelarVenda(String vendaId){
         return vendas.removeIf(venda -> {
-            if (venda.getNumeroSerie().equals(numeroSerie)) {
+            if (venda.getNumeroSerie().equals(vendaId)) {
                 venda.getRobo().setStatus(StatusRobo.DISPONIVEL);
                 return true;
             }

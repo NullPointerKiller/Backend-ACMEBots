@@ -10,20 +10,23 @@ public class VendaMock {
 
     static List<Venda> vendas = new ArrayList<>();
 
-    
-    static Date dataVenda = new Date();
-
     static Venda venda1 = new Venda(
         RoboMock.getRobos().get(0),
         ClienteMock.getClientes().get(0),
-        dataVenda
+        new Date()
     );
 
-    
-    //TODO: fazer dois cadastros de venda
+    static Venda venda2 = new Venda(
+        RoboMock.getRobos().get(1),
+        ClienteMock.getClientes().get(1),
+        new Date()
+    );
 
     public static List<Venda> getVendas(){
-        vendas.add(venda1);
+        if(vendas.isEmpty()){
+            vendas.add(venda1);
+            vendas.add(venda2);
+        }
         return vendas;
     }
 

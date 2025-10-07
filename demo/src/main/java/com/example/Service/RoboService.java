@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.MockData.RoboMock;
-import com.example.Model.Robo;
 import com.example.Model.Enum.SistemaMedida;
 import com.example.Model.Enum.StatusRobo;
+import com.example.Model.Robo;
 
 public class RoboService {
 
@@ -30,6 +30,16 @@ public class RoboService {
                 .filter(r -> r.getCarga() >= filtro.getCarga())
                 .filter(r -> r.getTemperatura() >= filtro.getTemperatura())
                 .toList();
+    }
+
+    public Robo atualizarRobo(String id, StatusRobo novoStatus){
+        for (Robo robo : robos) {
+            if(robo.getId().equals(id)){
+                robo.setStatus(novoStatus);
+                return robo;
+            }
+        }
+        return null;
     }
 
 }

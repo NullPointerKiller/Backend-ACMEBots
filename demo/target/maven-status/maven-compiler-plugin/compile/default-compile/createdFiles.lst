@@ -1,0 +1,17 @@
+com\example\Controller\VendaController.class
+com\example\Model\Enum\SistemaMedida.class
+com\example\Service\Calculo\CalculoVendaStrategy.class
+com\example\AcmeBotsApplication.class
+com\example\MockData\ClienteMock.class
+com\example\Controller\ClienteController.class
+com\example\Controller\RoboController.class
+com\example\Service\Calculo\CalculoImperial.class
+com\example\Model\Enum\StatusRobo.class
+com\example\MockData\RoboMock.class
+com\example\Model\Cliente.class
+com\example\Service\Calculo\CalculoMetrico.class
+com\example\Service\VendaService.class
+com\example\MockData\VendaMock.class
+com\example\Model\Robo.class
+com\example\Model\Venda.class
+com\example\Service\RoboService.class
